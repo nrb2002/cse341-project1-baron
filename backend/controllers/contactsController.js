@@ -1,21 +1,6 @@
 const { getCollection } = require("../db/mongo");
 const { ObjectId } = require("mongodb");
 
-async function getFirstContact(req, res) {
-  try {
-    const collection = getCollection();
-    const contacts = await collection.findOne({});
-
-    if (!contacts) {
-      return res.status(404).json({ message: "No contacts found" });
-    }
-
-    res.status(200).json(contacts);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-}
-
 /**
  * GET single contact by id (query param)
  * Example: /contacts?id=65abc123...
@@ -58,7 +43,6 @@ async function getAllContacts(req, res) {
 }
 
 module.exports = {
-  getFirstContact,
   getAllContacts,
   getContactById
 };
