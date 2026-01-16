@@ -1,15 +1,19 @@
 require("dotenv").config();
 
 const express = require("express");
-const cors = require("cors");
+const app = express();
 
+const PORT = process.env.PORT || 3000;
+
+const cors = require("cors");
+//Import routes
 const router = require("./routes");
 const contactsRoutes = require("./routes/contactsRoutes")
 
 const { connectDB } = require("./db/mongo");
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+
+
 
 app.use(cors()); //controls origin access
 app.use(express.json());
