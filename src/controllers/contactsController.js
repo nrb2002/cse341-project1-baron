@@ -74,15 +74,16 @@ async function updateContact(req, res){
     if (!id) {
       return res.status(400).json({ message: "Contact id is required" });
     }
-
+    //Make the data to update
     if (!updatedData || Object.keys(updatedData).length === 0) {
       return res.status(400).json({ message: "Update data is required" });
     }
-
+    
     const collection = getCollection();
 
+    console.log("ID received: ", id) //For testing purposes
+    
     const result = await collection.updateOne(
-      console.log("ID received: ", id),
       { _id: new ObjectId(id) },
       { $set: updatedData }
     );
