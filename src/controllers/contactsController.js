@@ -7,6 +7,8 @@ const { ObjectId } = require("mongodb");
  * Example: /contacts?id=65abc123...
  */
 async function getContactById(req, res) {
+  //#swagger.tags=['Contacts']
+  //#swagger.summary='Get single contact by ID'
   try {
     const { id } = req.query;
 
@@ -29,6 +31,8 @@ async function getContactById(req, res) {
 
 //Get all contacts
 async function getAllContacts(req, res) {
+  //#swagger.tags=['Contacts']
+  //#swagger.summary='Get all contacts'
   try {
     const collection = getCollection();
     const contacts = await collection.find({}).toArray();
@@ -45,6 +49,8 @@ async function getAllContacts(req, res) {
 
 //Create new contact
 async function createContact(req, res){
+  //#swagger.tags=['Contacts']
+  //#swagger.summary='Create new contact'
   try {
     const collection = getCollection();
     const newContact = req.body;
@@ -67,6 +73,8 @@ async function createContact(req, res){
 
 //Update a contact
 async function updateContact(req, res){
+  //#swagger.tags=['Contacts']
+  //#swagger.summary='Update a contact'
   try {
     const { id } = req.query;
     const updatedData = req.body;
@@ -100,6 +108,8 @@ async function updateContact(req, res){
 
 //Delete a contact
 async function deleteContact(req, res){
+  //#swagger.tags=['Contacts']
+  //#swagger.summary='Delete a contact'
   try {
     const { id } = req.query;
 
@@ -129,5 +139,5 @@ module.exports = {
   getContactById,
   createContact,
   updateContact,
-  deleteContact 
+  deleteContact   
 }

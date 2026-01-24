@@ -1,31 +1,48 @@
-require("dotenv").config();
-const express = require("express");
+require('dotenv').config();
+
+const express = require('express');
 const app = express();
-const cors = require("cors");
-const bodyParser = require("body-parser"); 
+
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const PORT = process.env.PORT || 3000;
 
 //Import routes
-const router = require("./routes");
-const contactsRoutes = require("./routes/contactsRoutes")
+const router = require('./routes');
+const contactsRoutes = require('./routes/contactsRoutes');
+const swaggerRoutes = require('./routes/swaggerRoutes');
 
-const { connectDB } = require("./db/mongo");
+//Get database info
+const { connectDB } = require('./db/mongo'); 
 
 app.use(cors()); //controls origin access
 app.use(express.json());
 app.use(bodyParser.json()); //Reads the data sent in the body of an HTTP request and turns it into req.body.
 
-connectDB().then(() => {
-  console.log("MongoDB connected, starting server...");
+//Make api work accross sites
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Acces-Control-Allow-Header',
+    'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
+  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  next();  
+});
 
-  app.use('/', router); //Get default route
-  app.use('/contacts', contactsRoutes); //Get Contacts route
+app.use('/', router); //Get default route
+app.use('/contacts', contactsRoutes); //Get Contacts route
+app.use('/api-docs', swaggerRoutes); //Get API documentation's route
+
+//Connect to database
+connectDB().then(() => {
+  console.log('MongoDB connected, starting server...'); //For testing
 
   app.listen(PORT, () => {
     console.log(`Server running at port: ${PORT}`);
   });
 }).catch(err => {
-  console.error("Failed to connect to MongoDB:", err);
+  console.error('Failed to connect to MongoDB:', err);
 });
 
