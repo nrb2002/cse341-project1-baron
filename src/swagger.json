@@ -12,7 +12,7 @@
     "https"
   ],
   "paths": {
-    "/": {
+    "/contacts": {
       "get": {
         "tags": [
           "Contacts"
@@ -37,6 +37,39 @@
         ],
         "summary": "Create new contact",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Contact info",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Rachel"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Ndomba"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "rachel@gmail.com"
+                },
+                "favoriteColor": {
+                  "type": "string",
+                  "example": "Brown"
+                },
+                "birthday": {
+                  "type": "string",
+                  "example": "Feb 16"
+                }
+              }
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -99,7 +132,45 @@
             "type": "string"
           },
           {
-            "name": "id",
+            "name": "body",
+            "in": "body",
+            "description": "Updated contact info",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "firstName": {
+                  "type": "string",
+                  "example": "Updated"
+                },
+                "lastName": {
+                  "type": "string",
+                  "example": "Name"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "updated@gmail.com"
+                }
+              }
+            }
+          },
+          {
+            "name": "in",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "required",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "schema",
             "in": "query",
             "type": "string"
           }

@@ -51,6 +51,12 @@ async function getAllContacts(req, res) {
 async function createContact(req, res){
   //#swagger.tags=['Contacts']
   //#swagger.summary='Create new contact'
+  /* #swagger.parameters['body'] = {
+    in: 'body',
+    description: 'Contact info',
+    required: true,
+    schema: { firstName: 'Rachel', lastName: 'Ndomba', email: 'rachel@gmail.com', favoriteColor: 'Brown', birthday: 'Feb 16' }
+  } */
   try {
     const collection = getCollection();
     const newContact = req.body;
@@ -75,6 +81,12 @@ async function createContact(req, res){
 async function updateContact(req, res){
   //#swagger.tags=['Contacts']
   //#swagger.summary='Update a contact'
+  /* #swagger.parameters['body'] = {
+    in: 'body',
+    description: 'Updated contact info',
+    required: true,
+    schema: { firstName: 'Updated', lastName: 'Name', email: 'updated@gmail.com' }
+  } */
   try {
     const { id } = req.query;
     const updatedData = req.body;
