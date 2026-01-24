@@ -1,1 +1,1 @@
-GET https://cse341-test.onrender.com/contacts
+GET http://localhost:3000/contacts

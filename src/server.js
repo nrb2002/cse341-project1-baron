@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const bodyParser = require("body-parser"); 
 
 const PORT = process.env.PORT || 3000;
 
@@ -13,6 +14,7 @@ const { connectDB } = require("./db/mongo");
 
 app.use(cors()); //controls origin access
 app.use(express.json());
+app.use(bodyParser.json()); //Reads the data sent in the body of an HTTP request and turns it into req.body.
 
 connectDB().then(() => {
   console.log("MongoDB connected, starting server...");
