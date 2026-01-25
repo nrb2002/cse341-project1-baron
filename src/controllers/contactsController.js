@@ -1,4 +1,4 @@
-const { response } = require("express");
+// const { response } = require("express");
 const { getCollection } = require("../db/mongo");
 const { ObjectId } = require("mongodb");
 
@@ -7,10 +7,17 @@ const { ObjectId } = require("mongodb");
  * Example: /contacts?id=65abc123...
  */
 async function getContactById(req, res) {
-  //#swagger.tags=['Contacts']
-  //#swagger.summary='Get Single Contact'
+  //#swagger.tags=["Contacts"]
+  //#swagger.summary="Get Single Contact"
+  //#swagger.description="Pull one contact by ID from the database. "
+  /* #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'Contact ID',
+        required: true,
+        type: 'string'
+  } */
   try {
-    const { id } = req.query;
+    const { id } = req.params;
 
     if (!id) {
       return res.status(400).json({ message: "Contact id is required" });
@@ -31,15 +38,16 @@ async function getContactById(req, res) {
 
 //Get all contacts
 async function getAllContacts(req, res) {
-  //#swagger.tags=['Contacts']
-  //#swagger.summary='Get All Contacts'
+  //#swagger.tags=["Contacts"]
+  //#swagger.summary="Get All Contacts"
+  //#swagger.description="Pull all contacts from the database. "
   try {
     const collection = getCollection();
     const contacts = await collection.find({}).toArray();
 
-    if (contacts.length === 0) {
-      return res.status(404).json({ message: "No contacts found" });
-    }
+    // if (contacts.length === 0) {
+    //   return res.status(404).json({ message: "No contacts found" });
+    // }
 
     res.status(200).json(contacts);
   } catch (error) {
@@ -49,18 +57,19 @@ async function getAllContacts(req, res) {
 
 //Create new contact
 async function createContact(req, res){
-  //#swagger.tags=['Contacts']
-  //#swagger.summary='Create New Contact'
-  /* #swagger.parameters['body'] = {
-    in: 'body',
-    description: 'Enter New Contact',
+  //#swagger.tags=["Contacts"]
+  //#swagger.summary="Create New Contact"
+  //#swagger.description="Insert new contact in the database. "
+  /* #swagger.parameters["body"] = {
+    in: "body",
+    description: "Enter New Contact",
     required: true,
     schema: { 
-      firstName: 'Rachel', 
-      lastName: 'Ndomba', 
-      email: 'rachel@gmail.com', 
-      favoriteColor: 'Brown', 
-      birthday: 'Feb 16' 
+      firstName: "John",
+      lastName: "Doe",
+      email: "john@domain.com",
+      favoriteColor: "color",
+      birthday: "Jan 1" 
     }
   } */
   try {
@@ -84,23 +93,32 @@ async function createContact(req, res){
 }
 
 //Update a contact
-async function updateContact(req, res){
-  //#swagger.tags=['Contacts']
-  //#swagger.summary='Update Contact Info'
-  /* #swagger.parameters['body'] = {
-    in: 'body',
-    description: 'Edit relevant Contact's fields',
+/* #swagger.parameters["body"] = {
+    in: "body",
+    description: "Updated contact fields",
     required: true,
     schema: {
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john@domain.com',
-      favoriteColor: 'color',
-      birthday: 'Jan 1'
+      firstName: "Jane",
+      lastName: "Doe",
+      email: "jane@domain.com",
+      favoriteColor: "blue",
+      birthday: "Feb 2"
     }
+} */
+async function updateContact(req, res){
+  //#swagger.tags=["Contacts"]
+  //#swagger.summary="Update Contact Info"
+  //#swagger.description="Edit a specific contact and save update in database. "
+
+  /* #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'Contact ID',
+        required: true,
+        type: 'string'
   } */
+      
   try {
-    const { id } = req.query;
+    const { id } = req.params;
     const updatedData = req.body;
 
     if (!id) {
@@ -115,6 +133,8 @@ async function updateContact(req, res){
 
     console.log("ID received: ", id) //For testing purposes
     
+    delete updatedData._id; //prevent _id overwrite
+
     const result = await collection.updateOne(
       { _id: new ObjectId(id) },
       { $set: updatedData }
@@ -132,11 +152,17 @@ async function updateContact(req, res){
 
 //Delete a contact
 async function deleteContact(req, res){
-  //#swagger.tags=['Contacts']
-  //#swagger.summary='Delete Contact'
-  //#swagger.description='Get Contact's ID to be able to delete it. '
+  //#swagger.tags=["Contacts"]
+  //#swagger.summary="Delete Contact"
+  //#swagger.description="Delete selected contact from the database."
+  /* #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'Contact ID',
+        required: true,
+        type: 'string'
+  } */
   try {
-    const { id } = req.query;
+    const { id } = req.params;
 
     if (!id) {
       return res.status(400).json({ message: "Contact id is required" });

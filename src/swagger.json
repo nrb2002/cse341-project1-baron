@@ -31,13 +31,10 @@
           "Contacts"
         ],
         "summary": "Get All Contacts",
-        "description": "",
+        "description": "Pull all contacts from the database. ",
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "404": {
-            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"
@@ -49,7 +46,7 @@
           "Contacts"
         ],
         "summary": "Create New Contact",
-        "description": "",
+        "description": "Insert new contact in the database. ",
         "parameters": [
           {
             "name": "body",
@@ -61,23 +58,23 @@
               "properties": {
                 "firstName": {
                   "type": "string",
-                  "example": "Rachel"
+                  "example": "John"
                 },
                 "lastName": {
                   "type": "string",
-                  "example": "Ndomba"
+                  "example": "Doe"
                 },
                 "email": {
                   "type": "string",
-                  "example": "rachel@gmail.com"
+                  "example": "john@domain.com"
                 },
                 "favoriteColor": {
                   "type": "string",
-                  "example": "Brown"
+                  "example": "color"
                 },
                 "birthday": {
                   "type": "string",
-                  "example": "Feb 16"
+                  "example": "Jan 1"
                 }
               }
             }
@@ -102,18 +99,14 @@
           "Contacts"
         ],
         "summary": "Get Single Contact",
-        "description": "",
+        "description": "Pull one contact by ID from the database. ",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "type": "string"
+            "type": "string",
+            "description": "Contact ID"
           }
         ],
         "responses": {
@@ -136,18 +129,26 @@
           "Contacts"
         ],
         "summary": "Update Contact Info",
-        "description": "Get Contact",
+        "description": "Edit a specific contact and save update in database. ",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Contact ID"
           },
           {
-            "name": "id",
-            "in": "query",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -170,18 +171,28 @@
           "Contacts"
         ],
         "summary": "Delete Contact",
-        "description": "Get Contact",
+        "description": "Delete selected contact from the database.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Contact ID"
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
