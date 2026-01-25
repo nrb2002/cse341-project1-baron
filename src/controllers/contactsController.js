@@ -93,18 +93,6 @@ async function createContact(req, res){
 }
 
 //Update a contact
-/* #swagger.parameters["body"] = {
-    in: "body",
-    description: "Updated contact fields",
-    required: true,
-    schema: {
-      firstName: "Jane",
-      lastName: "Doe",
-      email: "jane@domain.com",
-      favoriteColor: "blue",
-      birthday: "Feb 2"
-    }
-} */
 async function updateContact(req, res){
   //#swagger.tags=["Contacts"]
   //#swagger.summary="Update Contact Info"
@@ -117,6 +105,18 @@ async function updateContact(req, res){
         type: 'string'
   } */
       
+  /* #swagger.parameters["body"] = {
+    in: "body",
+    description: "Updated contact fields",
+    required: true,
+    schema: {
+      firstName: "Jane",
+      lastName: "Doe",
+      email: "jane@domain.com",
+      favoriteColor: "blue",
+      birthday: "Feb 2"
+    }
+} */
   try {
     const { id } = req.params;
     const updatedData = req.body;
