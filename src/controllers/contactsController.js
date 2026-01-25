@@ -7,7 +7,7 @@ const { ObjectId } = require("mongodb");
  * Example: /contacts?id=65abc123...
  */
 async function getContactById(req, res) {
-  //#swagger.tags=["Contacts"]
+  //#swagger.tags=["Contacts CRUD Operations"]
   //#swagger.summary="Get Single Contact"
   //#swagger.description="Pull one contact by ID from the database. "
   /* #swagger.parameters['id'] = {
@@ -38,7 +38,7 @@ async function getContactById(req, res) {
 
 //Get all contacts
 async function getAllContacts(req, res) {
-  //#swagger.tags=["Contacts"]
+  //#swagger.tags=["Contacts CRUD Operations"]
   //#swagger.summary="Get All Contacts"
   //#swagger.description="Pull all contacts from the database. "
   try {
@@ -57,7 +57,7 @@ async function getAllContacts(req, res) {
 
 //Create new contact
 async function createContact(req, res){
-  //#swagger.tags=["Contacts"]
+  //#swagger.tags=["Contacts CRUD Operations"]
   //#swagger.summary="Create New Contact"
   //#swagger.description="Insert new contact in the database. "
   /* #swagger.parameters["body"] = {
@@ -94,7 +94,7 @@ async function createContact(req, res){
 
 //Update a contact
 async function updateContact(req, res){
-  //#swagger.tags=["Contacts"]
+  //#swagger.tags=["Contacts CRUD Operations"]
   //#swagger.summary="Update Contact Info"
   //#swagger.description="Edit a specific contact and save update in database. "
 
@@ -152,7 +152,7 @@ async function updateContact(req, res){
 
 //Delete a contact
 async function deleteContact(req, res){
-  //#swagger.tags=["Contacts"]
+  //#swagger.tags=["Contacts CRUD Operations"]
   //#swagger.summary="Delete Contact"
   //#swagger.description="Delete selected contact from the database."
   /* #swagger.parameters['id'] = {
