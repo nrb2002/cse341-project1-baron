@@ -8,7 +8,7 @@ const { ObjectId } = require("mongodb");
  */
 async function getContactById(req, res) {
   //#swagger.tags=['Contacts']
-  //#swagger.summary='Get single contact by ID'
+  //#swagger.summary='Get Single Contact'
   try {
     const { id } = req.query;
 
@@ -32,7 +32,7 @@ async function getContactById(req, res) {
 //Get all contacts
 async function getAllContacts(req, res) {
   //#swagger.tags=['Contacts']
-  //#swagger.summary='Get all contacts'
+  //#swagger.summary='Get All Contacts'
   try {
     const collection = getCollection();
     const contacts = await collection.find({}).toArray();
@@ -50,12 +50,18 @@ async function getAllContacts(req, res) {
 //Create new contact
 async function createContact(req, res){
   //#swagger.tags=['Contacts']
-  //#swagger.summary='Create new contact'
+  //#swagger.summary='Create New Contact'
   /* #swagger.parameters['body'] = {
     in: 'body',
-    description: 'Contact info',
+    description: 'Enter New Contact',
     required: true,
-    schema: { firstName: 'Rachel', lastName: 'Ndomba', email: 'rachel@gmail.com', favoriteColor: 'Brown', birthday: 'Feb 16' }
+    schema: { 
+      firstName: 'Rachel', 
+      lastName: 'Ndomba', 
+      email: 'rachel@gmail.com', 
+      favoriteColor: 'Brown', 
+      birthday: 'Feb 16' 
+    }
   } */
   try {
     const collection = getCollection();
@@ -80,12 +86,18 @@ async function createContact(req, res){
 //Update a contact
 async function updateContact(req, res){
   //#swagger.tags=['Contacts']
-  //#swagger.summary='Update a contact'
+  //#swagger.summary='Update Contact Info'
   /* #swagger.parameters['body'] = {
     in: 'body',
-    description: 'Updated contact info',
+    description: 'Edit relevant Contact's fields',
     required: true,
-    schema: { firstName: 'Updated', lastName: 'Name', email: 'updated@gmail.com' }
+    schema: {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john@domain.com',
+      favoriteColor: 'color',
+      birthday: 'Jan 1'
+    }
   } */
   try {
     const { id } = req.query;
@@ -121,7 +133,8 @@ async function updateContact(req, res){
 //Delete a contact
 async function deleteContact(req, res){
   //#swagger.tags=['Contacts']
-  //#swagger.summary='Delete a contact'
+  //#swagger.summary='Delete Contact'
+  //#swagger.description='Get Contact's ID to be able to delete it. '
   try {
     const { id } = req.query;
 

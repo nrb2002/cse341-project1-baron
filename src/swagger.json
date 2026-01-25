@@ -12,12 +12,25 @@
     "https"
   ],
   "paths": {
-    "/contacts": {
+    "/": {
+      "get": {
+        "tags": [
+          "Home Page"
+        ],
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/contacts/": {
       "get": {
         "tags": [
           "Contacts"
         ],
-        "summary": "Get all contacts",
+        "summary": "Get All Contacts",
         "description": "",
         "responses": {
           "200": {
@@ -35,13 +48,13 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Create new contact",
+        "summary": "Create New Contact",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
-            "description": "Contact info",
+            "description": "Enter New Contact",
             "required": true,
             "schema": {
               "type": "object",
@@ -83,12 +96,12 @@
         }
       }
     },
-    "/{id}": {
+    "/contacts/{id}": {
       "get": {
         "tags": [
           "Contacts"
         ],
-        "summary": "Get single contact by ID",
+        "summary": "Get Single Contact",
         "description": "",
         "parameters": [
           {
@@ -122,8 +135,8 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Update a contact",
-        "description": "",
+        "summary": "Update Contact Info",
+        "description": "Get Contact",
         "parameters": [
           {
             "name": "id",
@@ -132,45 +145,7 @@
             "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "description": "Updated contact info",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "firstName": {
-                  "type": "string",
-                  "example": "Updated"
-                },
-                "lastName": {
-                  "type": "string",
-                  "example": "Name"
-                },
-                "email": {
-                  "type": "string",
-                  "example": "updated@gmail.com"
-                }
-              }
-            }
-          },
-          {
-            "name": "in",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "description",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "required",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "schema",
+            "name": "id",
             "in": "query",
             "type": "string"
           }
@@ -194,33 +169,19 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Delete a contact",
-        "description": "",
+        "summary": "Delete Contact",
+        "description": "Get Contact",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "type": "string"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "404": {
-            "description": "Not Found"
-          },
-          "500": {
-            "description": "Internal Server Error"
+          "default": {
+            "description": ""
           }
         }
       }

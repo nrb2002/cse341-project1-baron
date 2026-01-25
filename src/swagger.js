@@ -13,9 +13,7 @@ const doc = {
 };
 
 const outputFile = './swagger.json';
-const endpointFiles = [
-    './server.js'
-];
+const endpointFiles = ['./server.js']; //Swagger to get all endpoint files via the server to avoid routes confusion
 
 swaggerAutogen(outputFile, endpointFiles, doc) //Generates the documentation
 
