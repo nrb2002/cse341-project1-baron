@@ -19,7 +19,7 @@ app.use(cors()); //controls origin access
 app.use(express.json());
 
 
-//Make api work accross sites
+//Make api work accross sites -- this is handled by cors
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', '*');
 //   res.setHeader(
