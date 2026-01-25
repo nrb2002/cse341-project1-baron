@@ -15,20 +15,20 @@ const swaggerRoutes = require('./routes/swaggerRoutes');
 //Get database info
 const { connectDB } = require('./db/mongo'); 
 
-app.use(cors()); //controls origin access
+//app.use(cors()); //controls origin access
 app.use(express.json());
 
 
 //Make api work accross sites -- this is handled by cors
-// app.use((req, res, next) => {
-//   res.setHeader('Access-Control-Allow-Origin', '*');
-//   res.setHeader(
-//     'Acces-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
-//   );
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-//   next();  
-// });
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Acces-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Z-Key'
+  );
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  next();  
+});
 
 app.use('/', router); //Get default route
 app.use('/contacts', contactsRoutes); //Get Contacts route
