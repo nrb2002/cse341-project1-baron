@@ -1,11 +1,11 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Contacts API by Baron",
+    "title": "Contacts API",
     "version": "1.0.0",
     "description": "This is an API for storing and retrieving information about contacts. These contacts are to be stored in a MongoDB database and all interaction happen through the API. The API can be used by any frontend."
   },
-  "host": "https://cse341-project1-baron.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
     "http",
@@ -25,10 +25,10 @@
         }
       }
     },
-    "/contacts": {
+    "/contacts/": {
       "get": {
         "tags": [
-          "Contacts CRUD Operations"
+          "Contacts"
         ],
         "summary": "Get All Contacts",
         "description": "Pull all contacts from the database. ",
@@ -43,7 +43,7 @@
       },
       "post": {
         "tags": [
-          "Contacts CRUD Operations"
+          "Contacts"
         ],
         "summary": "Create New Contact",
         "description": "Insert new contact in the database. ",
@@ -96,7 +96,7 @@
     "/contacts/{id}": {
       "get": {
         "tags": [
-          "Contacts CRUD Operations"
+          "Contacts"
         ],
         "summary": "Get Single Contact",
         "description": "Pull one contact by ID from the database. ",
@@ -126,7 +126,7 @@
       },
       "put": {
         "tags": [
-          "Contacts CRUD Operations"
+          "Contacts"
         ],
         "summary": "Update Contact Info",
         "description": "Edit a specific contact and save update in database. ",
@@ -187,7 +187,7 @@
       },
       "delete": {
         "tags": [
-          "Contacts CRUD Operations"
+          "Contacts"
         ],
         "summary": "Delete Contact",
         "description": "Delete selected contact from the database.",
